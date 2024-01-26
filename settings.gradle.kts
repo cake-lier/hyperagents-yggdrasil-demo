@@ -1,2 +1,2 @@
-rootProject.name = "jacamo-template"
+rootProject.name = "hyperagents-yggdrasil-demo"
 

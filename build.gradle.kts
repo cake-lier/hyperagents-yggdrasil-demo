@@ -8,10 +8,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-defaultTasks = mutableListOf("run")
-
-group = "io.github.cake-lier"
-version = "0.1.0"
+group = "org.hyperagents.demo"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -24,10 +22,22 @@ repositories {
     maven {
         url = uri("https://repo.gradle.org/gradle/libs-releases-local/") // For older versions of Gradle tooling API
     }
+    maven {
+        url = uri("https://jitpack.io")
+    }
 }
+
+val vertxVersion = "4.5.1"
+val rdf4jVersion = "4.3.9"
 
 dependencies {
     implementation("org.jacamo:jacamo:1.2.2")
+    implementation(platform("io.vertx:vertx-stack-depchain:$vertxVersion"))
+    implementation("io.vertx:vertx-web-client")
+    implementation("io.vertx:vertx-web")
+    implementation("com.github.Interactions-HSG:wot-td-java:v0.1.2")
+    implementation("org.eclipse.rdf4j:rdf4j-model:$rdf4jVersion")
+    implementation("org.eclipse.rdf4j:rdf4j-rio-api:$rdf4jVersion")
 }
 
 sourceSets {
@@ -58,14 +68,19 @@ sourceSets {
 }
 
 tasks {
-    getByName<JavaExec>("run") {
-        description = "Runs the JaCaMo application"
+    register<JavaExec>("runWorkers") {
+        description = "Runs the JaCaMo application for the workers system"
         dependsOn("classes")
-        doFirst {
-            mkdir("log")
-        }
         mainClass = "jacamo.infra.JaCaMoLauncher"
-        args = listOf("config.jcm")
+        args = listOf("workers.jcm")
+        classpath = sourceSets.main.get().runtimeClasspath
+    }
+
+    register<JavaExec>("runManagement") {
+        description = "Runs the JaCaMo application for the manager system"
+        dependsOn("classes")
+        mainClass = "jacamo.infra.JaCaMoLauncher"
+        args = listOf("management.jcm")
         classpath = sourceSets.main.get().runtimeClasspath
     }
 }
