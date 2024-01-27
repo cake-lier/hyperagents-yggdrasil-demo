@@ -1,0 +1,4 @@
+**
+!Dockerfile
+!src/main/resources/conf
+!build/libs/app.jar

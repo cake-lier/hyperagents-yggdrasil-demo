@@ -1,0 +1,44 @@
+{
+  "http-config" : {
+    "host" : "0.0.0.0",
+    "port" : 8080,
+    "base-uri" : "http://localhost:8080/"
+  },
+  "rdf-store" : {
+    "in-memory" : false,
+    "store-path" : "data/"
+  },
+  "notification-config" : {
+    "enabled" : true
+  },
+  "environment-config" : {
+    "enabled" : true,
+    "known-artifacts" : [
+      {
+        "class" : "https://example.org/RobotArm",
+        "template" : "org.hyperagents.demo.RobotArm"
+      }
+    ],
+    "workspaces" : [
+      {
+        "name" : "production",
+        "artifacts" : [
+          {
+            "name" : "robot_arm1",
+            "class" : "https://example.org/RobotArm",
+            "init-params" : [
+              "lenny"
+            ]
+          },
+          {
+            "name" : "robot_arm2",
+            "class" : "https://example.org/RobotArm",
+            "init-params" : [
+              "homer"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

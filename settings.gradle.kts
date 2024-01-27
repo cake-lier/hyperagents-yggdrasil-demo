@@ -1,2 +1,3 @@
-rootProject.name = "hyperagents-yggdrasil-demo"
+rootProject.name = "demo"
 
+include("agents", "environment")

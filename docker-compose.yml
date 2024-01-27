@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  environment:
+    image: environment:latest
+    build:
+      context: environment
+    container_name: environment
+    network_mode: "host"
