@@ -32,8 +32,8 @@ If not, update the ports to open in the workers' agent system configuration file
 6. Wait until the following messages appear in the newly opened application window.
 
 ```
-[lenny] I found my robotic arm
-[homer] I found my robotic arm
+[alice] I found my robotic arm
+[bob] I found my robotic arm
 ```
 
 7. Since the workers' agent system is now running, the JaCaMo platform containing the supervisor agent needs to be started.
@@ -67,13 +67,13 @@ the agents focus on their message box to receive the messages from the environme
 It is why we see as first log messages for each agent the following lines.
 
 ```
-[homer] join workspace /main/workers: done
-[homer] focusing on artifact message_box_homer (at workspace /main/workers) using namespace default
-[homer] focus on message_box_homer: done
+[bob] join workspace /main/workers: done
+[bob] focusing on artifact message_box_bob (at workspace /main/workers) using namespace default
+[bob] focus on message_box_bob: done
 
-[lenny] join workspace /main/workers: done
-[lenny] focusing on artifact message_box_lenny (at workspace /main/workers) using namespace default
-[lenny] focus on message_box_lenny: done
+[alice] join workspace /main/workers: done
+[alice] focusing on artifact message_box_alice (at workspace /main/workers) using namespace default
+[alice] focus on message_box_alice: done
 
 [carl] join workspace /main/managers: done
 [carl] focusing on artifact message_box_carl (at workspace /main/managers) using namespace default
@@ -81,16 +81,16 @@ It is why we see as first log messages for each agent the following lines.
 ```
 
 The creation and focusing of artifacts is part of the configuration specified through the JCM files in the project. 
-Then, the Homer and Lenny agents, which in this use case represent the workers, start their day. 
+Then, the Bob and Alice agents, which in this use case represent the workers, start their day. 
 It begins by joining the production workspace representing their place of work in the production plant. 
 It allows them to acquire a body representation in the "production" workspace,
 an operation that ends successfully after the following lines are printed onscreen.
 
 ```
-[lenny] I'm starting my day
-[homer] I'm starting my day
-[lenny] I entered the shop floor
-[homer] I entered the shop floor
+[alice] I'm starting my day
+[bob] I'm starting my day
+[alice] I entered the shop floor
+[bob] I entered the shop floor
 ```
 
 Then, the two agents "look around" their workspace by querying the workspace representation on the environment platform using a SPARQL query. 
@@ -102,8 +102,8 @@ The operation concludes with sending the new body representation to the Yggdrasi
 The operation is successful when the following two log lines are printed.
 
 ```
-[lenny] I found my robotic arm
-[homer] I found my robotic arm
+[alice] I found my robotic arm
+[bob] I found my robotic arm
 ```
 
 Having found their robotic arm, the two agents wait for new messages from their supervisor regarding tasks involving it.
@@ -121,8 +121,8 @@ For each of them, it focuses on their body to check on their actions using the "
 It happens when each of the following lines gets printed onscreen.
 
 ```
-[carl] I've seen lenny at work
-[carl] I've seen homer at work
+[carl] I've seen alice at work
+[carl] I've seen bob at work
 ```
 
 After the focusing action, Carl tasks the two agents to move a cup from the shop floor to the warehouse.
@@ -131,16 +131,16 @@ namely the "method name" and the "target URI" of the operation, and sends an app
 It happens when the following gets logged onto the screen.
 
 ```
-[carl] I've told lenny to move one cup
-[carl] I've told homer to move one cup
+[carl] I've told alice to move one cup
+[carl] I've told bob to move one cup
 ```
 
 The two agents receive the goals to accomplish as signals from their message boxes.
 The agents receive the message and begin to do their job when the following two messages appear.
 
 ```
-[lenny] Starting to use my robotic arm.
-[homer] Starting to use my robotic arm.
+[alice] Starting to use my robotic arm.
+[bob] Starting to use my robotic arm.
 ```
 
 If the agent is "well-behaved," it will use its robotic arm correctly, i.e., doing the right action on it.
@@ -158,8 +158,8 @@ The robotic arms receive their message and then start moving when the following 
 The ending of the operations is signaled agent-side by the following two log lines.
 
 ```
-[homer] Ended using my robotic arm.
-[lenny] Ended using my robotic arm.
+[bob] Ended using my robotic arm.
+[alice] Ended using my robotic arm.
 ```
 
 Since the supervisor was looking for the actions done by the workers, it will receive their start and end signals through its message box.
@@ -167,30 +167,30 @@ If the action for moving a cup to the warehouse is received, then the number of 
 Carl thinks to itself about the excellent job done by the agent with the following message.
 
 ```
-[carl] lenny did a good job!
+[carl] alice did a good job!
 ```
 
 If, instead, an action for moving a cup from the warehouse to the shop floor happens, disaster ensues, 
 and the supervisor agent thinks to itself the following thought.
 
 ```
-[carl] homer did a bad job, I need to tell him!
+[carl] bob did a bad job, I need to tell him!
 ```
 
 Then, it punishes the agent for doing such a poor job by sending a message using again its body Thing Description.
 In particular, it uses the information about the action affordance to send a generic message as it did before. 
-The Homer agent receives the punishment by exclaiming the following message onscreen.
+The Bob agent receives the punishment by exclaiming the following message onscreen.
 
 ```
-[homer] D'oh!
+[bob] Oh no!
 ```
 
 Then, it chooses the other agent, who did not misbehave, and asks him to move a cup again from the shop floor to the warehouse. 
 The agent complies by printing the following log lines.
 
 ```
-[lenny] Starting to use my robotic arm.
-[lenny] Ended using my robotic arm.
+[alice] Starting to use my robotic arm.
+[alice] Ended using my robotic arm.
 ```
 
 We see on the standard output of the environment platform the same message as before regarding the use of the robotic arm.
@@ -204,7 +204,7 @@ Carl recognizes that two cups are finally in storage and that nothing is left to
 So, these last two lines are printed onscreen, and the system ends.
 
 ```
-[carl] lenny did a good job!
+[carl] alice did a good job!
 [carl] My job here is done!
 ```
 

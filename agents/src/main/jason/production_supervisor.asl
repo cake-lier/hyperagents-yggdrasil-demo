@@ -27,10 +27,10 @@
     .print(WorkerName, " did a bad job, I need to tell him!");
     lookupArtifact(ClientName, ClientId);
     punish(WorkerBody) [artifact_id(ClientId)];
-    if (WorkerName == "homer") {
-        ?body("lenny", OtherWorkerBody);
-    } elif (WorkerName == "lenny") {
-        ?body("homer", OtherWorkerBody);
+    if (WorkerName == "bob") {
+        ?body("alice", OtherWorkerBody);
+    } elif (WorkerName == "alice") {
+        ?body("bob", OtherWorkerBody);
     };
     assignMoveCupTask(OtherWorkerBody, "shop_floor", "warehouse") [artifact_id(ClientId)].
 

@@ -25,6 +25,6 @@
     };
     .print("Ended using my robotic arm.").
 
-+scold : true <- .print("D'oh!").
++scold : true <- .print("Oh no!").
 
 { include("$jacamoJar/templates/common-cartago.asl") }

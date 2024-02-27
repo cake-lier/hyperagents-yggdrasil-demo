@@ -27,14 +27,14 @@
             "name" : "robot_arm1",
             "class" : "https://example.org/RobotArm",
             "init-params" : [
-              "lenny"
+              "alice"
             ]
           },
           {
             "name" : "robot_arm2",
             "class" : "https://example.org/RobotArm",
             "init-params" : [
-              "homer"
+              "bob"
             ]
           }
         ]

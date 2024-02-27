@@ -1,31 +1,31 @@
 mas production_department {
-    agent lenny: worker.asl {
+    agent alice: worker.asl {
         beliefs: well_behaved(true)
-                 client(client_lenny)
-                 message_box(message_box_lenny)
+                 client(client_alice)
+                 message_box(message_box_alice)
 
         goal: work
 
-        focus: workers.message_box_lenny
+        focus: workers.message_box_alice
     }
 
-    agent homer: worker.asl {
+    agent bob: worker.asl {
         beliefs: well_behaved(false)
-                 client(client_homer)
-                 message_box(message_box_homer)
+                 client(client_bob)
+                 message_box(message_box_bob)
 
         goal: work
 
-        focus: workers.message_box_homer
+        focus: workers.message_box_bob
     }
 
     workspace workers {
-        artifact client_lenny: org.hyperagents.demo.WorkerClient(lenny, "http://localhost:8082", localhost, 8080)
-        artifact client_homer: org.hyperagents.demo.WorkerClient(homer, "http://localhost:8083", localhost, 8080)
-        artifact message_box_lenny: org.hyperagents.demo.WorkerMessageBox(8082)
-        artifact message_box_homer: org.hyperagents.demo.WorkerMessageBox(8083)
+        artifact client_alice: org.hyperagents.demo.WorkerClient(alice, "http://localhost:8082", localhost, 8080)
+        artifact client_bob: org.hyperagents.demo.WorkerClient(bob, "http://localhost:8083", localhost, 8080)
+        artifact message_box_alice: org.hyperagents.demo.WorkerMessageBox(8082)
+        artifact message_box_bob: org.hyperagents.demo.WorkerMessageBox(8083)
 
-        agents: lenny, homer
+        agents: alice, bob
     }
 
     asl-path: "src/main/jason"
