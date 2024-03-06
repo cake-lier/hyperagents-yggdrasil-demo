@@ -63,7 +63,7 @@ public class WorkerClient extends AbstractClient {
                                      .orElseThrow();
         agentBody.addAll(this.parseFromTurtle(String.format(
             """
-            @prefix hmas: <https://purl.org/hmas/core/>.
+            @prefix hmas: <https://purl.org/hmas/>.
             @prefix td: <https://www.w3.org/2019/wot/td#>.
             @prefix htv: <http://www.w3.org/2011/http#>.
             @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#>.
@@ -108,7 +108,7 @@ public class WorkerClient extends AbstractClient {
             robotArm.set(TDGraphReader.readFromString(ThingDescription.TDFormat.RDF_TURTLE, queryResult));
             agentBody.addAll(this.parseFromTurtle(String.format(
                 """
-                @prefix hmas: <https://purl.org/hmas/core/>.
+                @prefix hmas: <https://purl.org/hmas/>.
                 @prefix td: <https://www.w3.org/2019/wot/td#>.
                 @prefix htv: <http://www.w3.org/2011/http#>.
                 @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#>.
