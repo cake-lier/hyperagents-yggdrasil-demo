@@ -37,13 +37,13 @@ public class SupervisorClient extends AbstractClient {
                             """
                             PREFIX td: <https://www.w3.org/2019/wot/td#>
                             PREFIX hmas: <https://purl.org/hmas/>
+                            PREFIX jacamo: <https://purl.org/hmas/jacamo/>
                             PREFIX js: <https://www.w3.org/2019/wot/json-schema#>
-                            PREFIX ex: <https://example.org/>
                             PREFIX kqml: <https://example.org/kqml#>
                             
                             SELECT DISTINCT ?worker ?name
                             WHERE {
-                                ?worker a hmas:Artifact, ex:Body;
+                                ?worker a hmas:Artifact, jacamo:Body;
                                 td:title ?name;
                                 td:hasActionAffordance [
                                     a kqml:RequestAchieve;
@@ -86,13 +86,12 @@ public class SupervisorClient extends AbstractClient {
         this.doRequest(
             this.getClient()
                 .post(this.getPlatformPort(), this.getPlatformHost(), "/hub/")
-                .putHeader("X-Agent-WebID", this.getAgentId())
                 .putHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType())
                 .sendJsonObject(JsonObject.of(
                     "hub.mode",
                     "subscribe",
                     "hub.topic",
-                    workerBody.getThingURI().orElseThrow(),
+                    workerBody.getThingURI().orElseThrow().replaceFirst("/#.*$", ""),
                     "hub.callback",
                     this.getMessageBoxUri() + "/actions/" + workerName
                 ))
