@@ -25,6 +25,7 @@ public class WorkerClient extends AbstractClient {
             this.getClient()
                 .post(this.getPlatformPort(), this.getPlatformHost(), "/workspaces/production/join")
                 .putHeader("X-Agent-WebID", this.getAgentId())
+                .putHeader("X-Agent-LocalName", this.getAgentName())
                 .send()
         )));
     }
@@ -56,7 +57,7 @@ public class WorkerClient extends AbstractClient {
                     this.getAgentId()
                 )))
         );
-        final var bodyIri = agentBody.filter(null, RDF.TYPE, Values.iri("https://example.org/Body"))
+        final var bodyIri = agentBody.filter(null, RDF.TYPE, Values.iri("https://purl.org/hmas/jacamo/Body"))
                                      .subjects()
                                      .stream()
                                      .findFirst()
@@ -164,7 +165,7 @@ public class WorkerClient extends AbstractClient {
         }
         this.doRequest(
             this.getClient()
-                .putAbs(bodyIri.stringValue())
+                .putAbs(bodyIri.stringValue().replaceFirst("/#.*$", ""))
                 .putHeader("X-Agent-WebID", this.getAgentId())
                 .putHeader(HttpHeaders.CONTENT_TYPE, "text/turtle")
                 .sendBuffer(Buffer.buffer(this.parseToTurtle(agentBody)))

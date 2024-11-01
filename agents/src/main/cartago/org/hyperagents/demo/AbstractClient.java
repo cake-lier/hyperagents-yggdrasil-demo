@@ -53,6 +53,10 @@ public abstract class AbstractClient extends Artifact {
         return this.platformPort;
     }
 
+    protected final String getAgentName() {
+        return this.agentName;
+    }
+
     protected final String getAgentId() {
         return "http://" + this.platformHost + ":" + this.platformPort + "/agents/" + this.agentName;
     }
@@ -103,6 +107,8 @@ public abstract class AbstractClient extends Artifact {
                 writer.handleNamespace("js", "https://www.w3.org/2019/wot/json-schema#");
                 writer.handleNamespace("saref", "https://w3id.org/saref#");
                 writer.handleNamespace("schema", "https://schema.org/");
+                writer.handleNamespace("websub", "https://purl.org/hmas/websub/");
+                writer.handleNamespace("jacamo", "https://purl.org/hmas/jacamo/");
                 graph.forEach(writer::handleStatement);
                 writer.endRDF();
             } catch (final RDFHandlerException e) {
